@@ -4,13 +4,11 @@ Master Puzzle is a web app that turns random paintings from the Met Museum into 
 
 ## Functionality
 
-- **Artwork source**: Random paintings from the [Met Museum API](https://metmuseum.github.io/) (departments 11 & 21). Object IDs cached in localStorage.
-- **Puzzle generation**: Each image is split into irregular pieces via Voronoi diagram (d3-delaunay). Seeded by artwork ID for stable layout.
-- **Image loading**: Images are loaded through a backend image proxy (FastAPI) to avoid CORS; primary and fallback (small) URLs are tried.
-- **Drag and drop**: Pieces are draggable on the left; drop on the right-side silhouette to place. Magnetic snap: pieces snap when dropped inside or near the correct slot.
-- **Progress**: Placed pieces are persisted in localStorage per puzzle seed. Completed puzzle shows the full image and a “Well done!” card with artwork title, artist, country, and date.
-- **New puzzle**: Navbar refresh button (hidden when puzzle is complete). “Try another” on the completion screen. Button disabled while loading.
-- **Routing**: Single main route; 404 and error (e.g. failed image load) views with “Go home” and optional “Try again”.
+- **Artwork**: Each puzzle uses a random painting from the [Met Museum collection](https://metmuseum.github.io/).
+- **Puzzle**: The image is cut into irregular pieces. You drag pieces on the left and drop them into the outline on the right; they snap into place when close enough.
+- **Progress**: Your progress is saved. When you finish, you see the full image and details (title, artist, country, date).
+- **New puzzle**: Use the refresh icon in the header to get another painting, or “Try another” on the completion screen. The button is disabled while a puzzle is loading.
+- **Errors**: If a page isn’t found or an image fails to load, you get a simple message with “Go home” and, when relevant, “Try again”.
 
 ## Stack
 
