@@ -2,7 +2,10 @@
   "scripts": {
     "deps": "npm install && cd client && npm install && cd ../server && pip install -r requirements.txt",
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && uvicorn main:app --reload\"",
-    "git": "git add . && git commit -m \"update\" && git push"
+    "git": "git add . && git commit -m \"update\" && git push",
+    "deploy:server": "gcloud beta builds submit --config=cloudbuild.yaml . --project=master-488904",
+    "deploy:client": "cd client && npm run build && cd .. && firebase deploy",
+    "deploy": "npm run deploy:server && npm run deploy:client"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

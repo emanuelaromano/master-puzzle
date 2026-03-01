@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
-import { Calendar, CircleCheck, Globe, RefreshCw, User } from 'lucide-react'
+import { Calendar, CircleCheck, Globe, Palette, RefreshCw, User } from 'lucide-react'
 import { usePuzzle } from '../hooks/usePuzzle.tsx'
 
 const detailIconSize = 18
@@ -30,7 +30,7 @@ export default function Congrats() {
       />
       {metObject?.title && (
         <Typography variant="h6" component="p" sx={{ fontWeight: 500, textAlign: 'center' }}>
-          {metObject.title}
+          Well done!
         </Typography>
       )}
       {metObject && (
@@ -49,6 +49,14 @@ export default function Congrats() {
           }}
         >
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'flex-start', textAlign: 'left' }}>
+            {metObject.title && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: 'text.secondary' }}>
+                <Palette size={detailIconSize} style={{ flexShrink: 0 }} aria-hidden />
+                <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500 }}>
+                  Title: <b>{metObject.title}</b>
+                </Typography>
+              </Box>
+            )}
             {metObject.artistDisplayName && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: 'text.secondary' }}>
                 <User size={detailIconSize} style={{ flexShrink: 0 }} aria-hidden />

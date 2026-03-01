@@ -19,8 +19,12 @@ type UseCutPiecesParams = {
   setPieceError: (pieceError: string | null) => void
 }
 
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ??
+  (import.meta.env.DEV ? '' : 'https://master-puzzle-676513755297.us-central1.run.app')
+
 function toProxyUrl(src: string) {
-  return `/api/image-proxy?url=${encodeURIComponent(src)}`
+  return `${API_BASE}/api/image-proxy?url=${encodeURIComponent(src)}`
 }
 
 function buildPuzzleData(img: HTMLImageElement, seed: string): {

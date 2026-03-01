@@ -1,9 +1,24 @@
 import httpx
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from urllib.parse import urlparse
 
 app = FastAPI()
+
+CORS_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://master-puzzle-676513755297.us-central1.run.app",
+    "https://master-488904.web.app",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 PICSUM_URL = "https://picsum.photos/seed/puzzle/800/600"
 ALLOWED_IMAGE_HOSTS = {"images.metmuseum.org"}

@@ -1,6 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { Box, IconButton } from '@mui/material'
-import { RefreshCw } from 'lucide-react'
+import { Box } from '@mui/material'
 import { usePuzzle } from '../hooks/usePuzzle.tsx'
 import { useCutPieces } from '../hooks/useCutPieces'
 import { useDrag } from '../hooks/useDrag'
@@ -15,12 +14,9 @@ export default function Pieces() {
     setPieceImages,
     setResolvedImageUrl,
     setFullImageDataUrl,
-    pieceError,
     setPieceError,
     placedSlots,
     setPendingDrop,
-    newSeed,
-    newSeedLoading,
   } = usePuzzle()
   const { pieces, setPieces } = useCutPieces({
     imageSeed,
@@ -57,32 +53,8 @@ export default function Pieces() {
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 3, color: 'text.secondary' }}>
           Loading artwork…
         </Box>
-      ) : pieceError ? (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 3, color: 'text.secondary' }}>
-          {pieceError}
-        </Box>
       ) : puzzleGrid ? (
         <>
-          <IconButton
-            aria-label="Fetch new puzzle"
-            onClick={newSeed}
-            disabled={newSeedLoading}
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              zIndex: 1,
-              color: 'text.secondary',
-              opacity: 0.5,
-              '&:hover': {
-                backgroundColor: 'transparent',
-                opacity: 0.8,
-                transition: 'opacity 0.2s ease-in-out',
-              },
-            }}
-          >
-            <RefreshCw size={20} style={{ backgroundColor: 'transparent'}} />
-          </IconButton>
           <Box
             sx={{
               position: 'absolute',

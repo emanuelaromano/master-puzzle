@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Box } from '@mui/material'
 import { usePuzzle } from '../hooks/usePuzzle.tsx'
-import { pathFromCell, pointInPolygon } from '../utils/geometry'
+import { pathFromCell, pointInOrNearPolygon } from '../utils/geometry'
+
+/** How far outside the slot (as fraction of cell size) a piece can be dropped and still snap. */
+const MAGNETIC_MARGIN = 0.45
 import { puzzleAreaSx } from '../utils/puzzleLayout'
 
 export default function Image() {
@@ -28,7 +31,7 @@ export default function Image() {
     const x = ((pendingDrop.clientX - rect.left) / rect.width) * workW
     const y = ((pendingDrop.clientY - rect.top) / rect.height) * workH
     for (let i = 0; i < cells.length; i++) {
-      if (pointInPolygon(x, y, cells[i]) && pendingDrop.pieceId === i) {
+      if (pendingDrop.pieceId === i && pointInOrNearPolygon(x, y, cells[i], MAGNETIC_MARGIN)) {
         setPlacedSlot(i)
         break
       }

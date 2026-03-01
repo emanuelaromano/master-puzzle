@@ -4,16 +4,27 @@ import Pieces from '../components/Pieces'
 import Congrats from '../components/Congrats'
 import Image from '../components/Image'
 import Loading from '../components/Loading'
+import Error from './Error'
 
 export default function Puzzle() {
-  const { metObject, puzzleGrid, pieceError, placedSlots, newSeedLoading } = usePuzzle()
+  const { metObject, puzzleGrid, pieceError, placedSlots, newSeed, newSeedLoading } = usePuzzle()
   const isComplete =
     puzzleGrid != null && placedSlots.size > 0 && placedSlots.size === puzzleGrid.cells.length
+
+  if (pieceError) {
+    return (
+      <Error
+        message={pieceError}
+        onRetry={newSeed}
+        retryLoading={newSeedLoading}
+      />
+    )
+  }
 
   const showLoading =
     !metObject ||
     newSeedLoading ||
-    (Boolean(metObject) && puzzleGrid === null && !pieceError)
+    (Boolean(metObject) && puzzleGrid === null)
   const loadingMessage = !metObject
     ? 'Loading artwork…'
     : newSeedLoading
